@@ -23,12 +23,6 @@ describe('SessionService', () => {
   });
 
   // Unit
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
-
-  // Unit
   it('should mark user as logged when calling logIn', () => {
 
     const sessionInformation = { ...sessionInformationSample };

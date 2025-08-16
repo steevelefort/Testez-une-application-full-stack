@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { expect } from '@jest/globals';
 import { Observable, of } from 'rxjs';
@@ -20,7 +20,6 @@ describe('SessionsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientModule
       ],
       providers: [
         { provide: HttpClient, useValue: mockHttpClient },
@@ -28,11 +27,6 @@ describe('SessionsService', () => {
     });
     service = TestBed.inject(SessionApiService);
     pathService = service['pathService'];
-  });
-
-  // Unit
-  it('should be created', () => {
-    expect(service).toBeTruthy();
   });
 
 

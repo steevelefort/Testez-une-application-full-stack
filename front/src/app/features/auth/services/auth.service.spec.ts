@@ -3,7 +3,6 @@ import { TestBed } from '@angular/core/testing';
 import { expect } from '@jest/globals';
 import { Observable, of } from 'rxjs';
 import { SessionInformation } from 'src/app/interfaces/sessionInformation.interface';
-// import { Session } from '../interfaces/session.interface';
 
 import { AuthService } from './auth.service';
 
@@ -29,11 +28,6 @@ describe('SessionsService', () => {
     });
     service = TestBed.inject(AuthService);
     pathService = service['pathService'];
-  });
-
-  // Unit
-  it('should be created', () => {
-    expect(service).toBeTruthy();
   });
 
   it('should return an Observable when register() is called', () => {
