@@ -40,4 +40,62 @@
 //
 //
 // -- This will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', (isAdmin = true) => {
+
+  cy.visit('/login')
+
+  const mockResponse = {
+    token: "xxxxxxx",
+    type: "Bearer",
+    id: 1,
+    username: isAdmin ? "Admin" : "User",
+    firstName: isAdmin ? "Admin" : "John",
+    lastName: isAdmin ? "Admin" : "Doe",
+    admin: isAdmin
+  };
+
+    const mockAllSessionsResponse = [{
+      "id": 1,
+      "name": "Une session",
+      "date": "2025-08-14",
+      "teacher_id": 1,
+      "description": "Ceci est un exemple de session",
+      "users": [1,2],
+      "createdAt": "2025-08-14",
+      "updatedAt": "2025-08-14"
+    },
+    {
+      "id": 2,
+      "name": "Une session",
+      "date": "2025-08-14",
+      "teacher_id": 1,
+      "description": "Ceci est un exemple de session",
+      "users": [3],
+      "createdAt": "2025-08-14",
+      "updatedAt": "2025-08-14"
+    }];
+
+  cy.intercept('POST', '/api/auth/login', {
+    body: mockResponse,
+  })
+
+  cy.intercept(
+    {
+      method: 'GET',
+      url: '/api/session',
+    },
+    []).as('session')
+
+    cy.intercept('GET', '/api/session', mockAllSessionsResponse)
+
+  cy.get('input[formControlName=email]').type("yoga@studio.com")
+  cy.get('input[formControlName=password]').type(`${"test!1234"}{enter}{enter}`)
+
+  // cy.url().should('include', '/sessions');
+})
+
+
+
+
+
