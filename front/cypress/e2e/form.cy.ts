@@ -5,8 +5,6 @@ describe('Form spec', () => {
 
   it("should save a new session", () => {
 
-    const getErrorMessage = () => cy.get("[data-cy=error]");
-
     const checkField = (field, data) => {
       // Fill the field and check the validity
       cy.get(`[data-cy=${field}]`).type(data).blur();
@@ -49,8 +47,6 @@ describe('Form spec', () => {
 
 
   it("should update a session", () => {
-
-    const getErrorMessage = () => cy.get("[data-cy=error]");
 
     const checkField = (field, data) => {
       // Fill the field and check the validity

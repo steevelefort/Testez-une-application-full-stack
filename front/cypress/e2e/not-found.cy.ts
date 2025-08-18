@@ -4,7 +4,7 @@ describe('NotFound spec', () => {
 
     cy.visit('/404');
 
-    cy.get("[data-cy=not-found").should("contain", "Page not found !");
+    cy.get("[data-cy=not-found]").should("contain", "Page not found !");
 
   })
 

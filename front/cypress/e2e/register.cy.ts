@@ -38,7 +38,7 @@ describe('Register spec', () => {
     checkField("firstName", faker.name.firstName());
     checkField("lastName", faker.name.lastName());
     checkField("email", faker.internet.email());
-    checkField("password", faker.internet.password(), false);
+    checkField("password", "Test123!", false);
 
     // Click the register button
     getSubmitButton().click();
@@ -56,7 +56,7 @@ describe('Register spec', () => {
     cy.get("[data-cy=firstName]").type(faker.name.firstName());
     cy.get("[data-cy=lastName]").type(faker.name.lastName());
     cy.get("[data-cy=email]").type(faker.internet.email());
-    cy.get("[data-cy=password]").type(faker.internet.password());
+    cy.get("[data-cy=password]").type("Test123!");
 
     cy.get("[data-cy=submit]").click();
 

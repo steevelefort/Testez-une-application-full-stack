@@ -12,15 +12,15 @@ describe('Detail spec', () => {
     // Click on the "Detail" button of the first session
     cy.get("[data-cy=detail-button]").first().click();
 
-    cy.get("[data-cy=session-name").should("contain", "Une Session");
-    cy.get("[data-cy=teacher-name").should("contain", "Hélène THIERCELIN");
-    cy.get("[data-cy=attendees").should("contain", "2 attendees");
-    cy.get("[data-cy=date").should("contain", "August 14, 2025");
-    cy.get("[data-cy=description").should("contain", "Ceci est un exemple de session");
-    cy.get("[data-cy=create").should("contain", "August 14, 2025");
-    cy.get("[data-cy=update").should("contain", "August 14, 2025");
+    cy.get("[data-cy=session-name]").should("contain", "Une Session");
+    cy.get("[data-cy=teacher-name]").should("contain", "Hélène THIERCELIN");
+    cy.get("[data-cy=attendees]").should("contain", "2 attendees");
+    cy.get("[data-cy=date]").should("contain", "August 14, 2025");
+    cy.get("[data-cy=description]").should("contain", "Ceci est un exemple de session");
+    cy.get("[data-cy=create]").should("contain", "August 14, 2025");
+    cy.get("[data-cy=update]").should("contain", "August 14, 2025");
     // Only for admin
-    cy.get("[data-cy=delete").should("exist");
+    cy.get("[data-cy=delete]").should("exist");
 
   })
 
@@ -35,13 +35,13 @@ describe('Detail spec', () => {
     // Click on the "Detail" button of the first session
     cy.get("[data-cy=detail-button]").first().click();
 
-    cy.get("[data-cy=session-name").should("contain", "Une Session");
-    cy.get("[data-cy=teacher-name").should("contain", "Hélène THIERCELIN");
-    cy.get("[data-cy=attendees").should("contain", "2 attendees");
-    cy.get("[data-cy=date").should("contain", "August 14, 2025");
-    cy.get("[data-cy=description").should("contain", "Ceci est un exemple de session");
-    cy.get("[data-cy=create").should("contain", "August 14, 2025");
-    cy.get("[data-cy=update").should("contain", "August 14, 2025");
+    cy.get("[data-cy=session-name]").should("contain", "Une Session");
+    cy.get("[data-cy=teacher-name]").should("contain", "Hélène THIERCELIN");
+    cy.get("[data-cy=attendees]").should("contain", "2 attendees");
+    cy.get("[data-cy=date]").should("contain", "August 14, 2025");
+    cy.get("[data-cy=description]").should("contain", "Ceci est un exemple de session");
+    cy.get("[data-cy=create]").should("contain", "August 14, 2025");
+    cy.get("[data-cy=update]").should("contain", "August 14, 2025");
 
     // Only one of participate/unparticipate buttons exists
     cy.get("[data-cy=participate],[data-cy=unparticipate]").should("have.length", 1);
@@ -115,7 +115,7 @@ describe('Detail spec', () => {
     // Login as regular user
     cy.login(false)
 
-    cy.intercept('GET', '/api/session/1', {mockSessionResponse, users: []})
+    cy.intercept('GET', '/api/session/1', {...mockSessionResponse, users: []})
     cy.intercept('GET', '/api/teacher/1', mockTeacherResponse)
     cy.intercept('POST', '/api/session/1/participate/1', {})
 
