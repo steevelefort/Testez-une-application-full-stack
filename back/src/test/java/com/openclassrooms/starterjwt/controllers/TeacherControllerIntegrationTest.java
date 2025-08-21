@@ -37,7 +37,6 @@ class TeacherControllerIntegrationTest {
   @Autowired
   TeacherRepository teacherRepository;
 
-  // Integration
   @Test
   @WithMockUser
   void getApiTeacher_ValidId_ReturnsOkAndUserData() throws Exception {
@@ -56,7 +55,6 @@ class TeacherControllerIntegrationTest {
     assertThat(responseContent).contains(savedTeacher.getLastName());
   }
 
-  // Integration
   @Test
   @WithMockUser
   void getApiTeacher_NonValidId_ReturnsBadRequest() throws Exception {
@@ -67,7 +65,6 @@ class TeacherControllerIntegrationTest {
         .andExpect(status().isBadRequest());
   }
 
-  // Integration
   @Test
   @WithMockUser
   void getApiTeacher_NonExistingId_ReturnsNotFound() throws Exception {
@@ -78,7 +75,6 @@ class TeacherControllerIntegrationTest {
         .andExpect(status().isNotFound());
   }
 
-  // Integration
   @Test
   @WithMockUser
   void getApiTeacher_WhithoutId_ReturnsOkWithAListOfTeachers() throws Exception {

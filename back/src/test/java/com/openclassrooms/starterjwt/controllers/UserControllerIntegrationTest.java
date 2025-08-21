@@ -33,7 +33,6 @@ class UserControllerIntegrationTest {
   @Autowired
   UserRepository userRepository;
 
-  // Integration
   @Test
   @WithMockUser
   void getApiUser_ValidId_ReturnsOkAndUserData() throws Exception {
@@ -53,7 +52,6 @@ class UserControllerIntegrationTest {
     assertThat(responseContent).contains(savedUser.getLastName());
   }
 
-  // Integration
   @Test
   @WithMockUser
   void getApiUser_NonValidId_ReturnsBadRequest() throws Exception {
@@ -64,7 +62,6 @@ class UserControllerIntegrationTest {
         .andExpect(status().isBadRequest());
   }
 
-  // Integration
   @Test
   @WithMockUser
   void getApiUser_NonExistingId_ReturnsNotFound() throws Exception {
@@ -75,7 +72,6 @@ class UserControllerIntegrationTest {
         .andExpect(status().isNotFound());
   }
 
-  // Integration
   @Test
   @WithMockUser(username = "user-x270190@existing.domain")
   void deleteApiUser_ValidIdAndSameAsCurrentUser_DeleteUserAndReturnOk() throws Exception {
@@ -89,7 +85,6 @@ class UserControllerIntegrationTest {
         .andExpect(status().isOk());
   }
 
-  // Integration
   @Test
   @WithMockUser(username = "user-x270190@existing.domain")
   void deleteApiUser_NotExistingId_ReturnNotFound() throws Exception {
@@ -100,7 +95,6 @@ class UserControllerIntegrationTest {
         .andExpect(status().isNotFound());
   }
 
-  // Integration
   @Test
   @WithMockUser(username = "user-x270190@existing.domain")
   void deleteApiUser_NotNumericId_ReturnBadRequest() throws Exception {
@@ -111,7 +105,6 @@ class UserControllerIntegrationTest {
         .andExpect(status().isBadRequest());
   }
 
-  // Integration
   @Test
   @WithMockUser(username = "user-x270190@existing.domain")
   void deleteApiUser_ValidIdAndDifferentAsCurrentUser_ReturnUnauthorized() throws Exception {

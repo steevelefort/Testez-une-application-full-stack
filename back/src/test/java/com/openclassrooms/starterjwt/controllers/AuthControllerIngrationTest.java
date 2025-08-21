@@ -37,7 +37,6 @@ class AuthControllerIntegrationTest {
   @Autowired
   PasswordEncoder passwordEncoder;
 
-  // Integration
   @Test
   @WithMockUser
   void postApiAuthLogin_ValidCredentials_ReturnsOk() throws Exception {
@@ -62,7 +61,6 @@ class AuthControllerIntegrationTest {
     assertThat(response).contains("true"); // isAdmin
   }
 
-  // Integration
   @Test
   void postApiAuthRegister_ValidData_ReturnsOk() throws Exception {
     String firstName = "Steeve";
@@ -83,7 +81,6 @@ class AuthControllerIntegrationTest {
     assertThat(response).contains("User registered successfully!");
   }
 
-  // Integration
   @Test
   void postApiAuthRegister_AlreadyExistingEmail_ReturnsBadRequest() throws Exception {
     User user = TestDataGenerator.generateUser();

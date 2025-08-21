@@ -43,7 +43,6 @@ class SessionControllerIntegrationTest {
   @Autowired
   UserRepository userRepository;
 
-  // Integration
   @Test
   @WithMockUser
   void getApiSession_ValidId_ReturnsOkAndSessionData() throws Exception {
@@ -62,7 +61,6 @@ class SessionControllerIntegrationTest {
     assertThat(responseContent).contains(savedSession.getDescription()); // si ce champ existe
   }
 
-  // Integration
   @Test
   @WithMockUser
   void getApiSession_NotExistingId_ReturnsNotFound() throws Exception {
@@ -73,7 +71,6 @@ class SessionControllerIntegrationTest {
         .andExpect(status().isNotFound());
   }
 
-  // Integration
   @Test
   @WithMockUser
   void getApiSession_NotNumericId_ReturnsBadRequest() throws Exception {
@@ -84,7 +81,6 @@ class SessionControllerIntegrationTest {
         .andExpect(status().isBadRequest());
   }
 
-  // Integration
   @Test
   @WithMockUser
   void getApiSession_WithoutId_ReturnsOkAndAnListOfSessions() throws Exception {
@@ -103,7 +99,6 @@ class SessionControllerIntegrationTest {
     assertThat(responseContent).contains(savedSession.getDescription());
   }
 
-  // Integration
   @Test
   @WithMockUser
   void postApiSession_WithValidSessionData_ReturnsOkAndSessionData() throws Exception {
@@ -131,7 +126,6 @@ class SessionControllerIntegrationTest {
     assertThat(responseContent).contains(sessionDescription);
   }
 
-  // Integration
   @Test
   @WithMockUser
   void putApiSession_WithValidIdAndSessionData_ReturnsOkAndSessionData() throws Exception {
@@ -159,7 +153,6 @@ class SessionControllerIntegrationTest {
     assertThat(responseContent).contains(updatedSessionDate);
   }
 
-  // Integration
   @Test
   @WithMockUser
   void putApiSession_WithNonNumericId_ReturnsBadRequest() throws Exception {
@@ -177,7 +170,6 @@ class SessionControllerIntegrationTest {
         .andExpect(status().isBadRequest());
   }
 
-  // Integration
   @Test
   @WithMockUser
   void deleteApiSession_WithValidId_ReturnsOk() throws Exception {
@@ -194,7 +186,6 @@ class SessionControllerIntegrationTest {
     assertThat(retrievedSession).isNull();
   }
 
-  // Integration
   @Test
   @WithMockUser
   void deleteApiSession_WithNotExistingId_ReturnsNotFound() throws Exception {
@@ -205,7 +196,6 @@ class SessionControllerIntegrationTest {
         .andExpect(status().isNotFound());
   }
 
-  // Integration
   @Test
   @WithMockUser
   void deleteApiSession_WithNotValidId_ReturnsBadRequest() throws Exception {
@@ -216,7 +206,6 @@ class SessionControllerIntegrationTest {
         .andExpect(status().isBadRequest());
   }
 
-  // Integration
   @Test
   @WithMockUser
   void participateApiSession_WithValidIds_ReturnsOk() throws Exception {
@@ -235,7 +224,6 @@ class SessionControllerIntegrationTest {
     assertThat(retrievedSession.getUsers()).contains(savedUser);
   }
 
-  // Integration
   @Test
   @WithMockUser
   void participateApiSession_WithNotNumericIds_ReturnsBadRequest() throws Exception {
@@ -246,7 +234,6 @@ class SessionControllerIntegrationTest {
         .andExpect(status().isBadRequest());
   }
 
-  // Integration
   @Test
   @WithMockUser
   void unParticipateApiSession_WithValidIds_ReturnsOk() throws Exception {
@@ -266,7 +253,6 @@ class SessionControllerIntegrationTest {
     assertThat(retrievedSession.getUsers()).doesNotContain(savedUser);
   }
 
-  // Integration
   @Test
   @WithMockUser
   void unParticipateApiSession_WithNotNumericIds_ReturnsBadRequest() throws Exception {
