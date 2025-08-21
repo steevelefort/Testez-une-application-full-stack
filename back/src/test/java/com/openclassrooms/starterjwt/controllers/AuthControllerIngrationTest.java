@@ -65,7 +65,6 @@ class AuthControllerIntegrationTest {
 
 
   @Test
-  // @WithMockUser
   void postApiAuthRegister_ValidData_ReturnsOk() throws Exception {
     String firstName = "Steeve";
     String lastName = "Lefort";
@@ -87,7 +86,6 @@ class AuthControllerIntegrationTest {
 
 
   @Test
-  // @WithMockUser
   void postApiAuthRegister_AlreadyExistingEmail_ReturnsBadRequest() throws Exception {
     User user = TestDataGenerator.generateUser();
     User savedUser = userRepository.save(user);
