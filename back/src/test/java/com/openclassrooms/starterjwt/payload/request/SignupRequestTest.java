@@ -13,7 +13,6 @@ public class SignupRequestTest {
     signupRequest.setFirstName("John");
     signupRequest.setLastName("Doe");
     signupRequest.setPassword("password123");
-
     SignupRequest signupRequest2 = new SignupRequest();
     signupRequest2.setEmail("test@test.com");
     signupRequest2.setFirstName("John");
@@ -31,7 +30,6 @@ public class SignupRequestTest {
     signupRequest.setFirstName("John");
     signupRequest.setLastName("Doe");
     signupRequest.setPassword("password123");
-
     SignupRequest signupRequest2 = new SignupRequest();
     signupRequest2.setEmail("different@test.com");
     signupRequest2.setFirstName("Jane");
@@ -54,6 +52,7 @@ public class SignupRequestTest {
   void equals_shouldReturnTrue_whenBothFieldsAreNull() {
     SignupRequest signupRequest1 = new SignupRequest();
     SignupRequest signupRequest2 = new SignupRequest();
+
     assertThat(signupRequest1.equals(signupRequest2)).isTrue();
   }
 
@@ -61,6 +60,7 @@ public class SignupRequestTest {
   void equals_shouldReturnFalse_whenOneFieldIsNullAndOtherNot() {
     SignupRequest signupRequest1 = new SignupRequest();
     SignupRequest signupRequest2 = new SignupRequest();
+
     signupRequest2.setEmail("test@test.com");
 
     assertThat(signupRequest1.equals(signupRequest2)).isFalse();
@@ -74,7 +74,6 @@ public class SignupRequestTest {
     signupRequest.setFirstName("John");
     signupRequest.setLastName("Doe");
     signupRequest.setPassword("password123");
-
     SignupRequest signupRequest2 = new SignupRequest();
     signupRequest2.setEmail("test@test.com");
     signupRequest2.setFirstName("John");
@@ -87,6 +86,7 @@ public class SignupRequestTest {
   @Test
   void hashCode_shouldWork_whenFieldsAreNull() {
     SignupRequest signupRequest = new SignupRequest();
+
     assertThat(signupRequest.hashCode()).isNotNegative();
     assertThat(signupRequest.hashCode()).isInstanceOf(Integer.class);
   }

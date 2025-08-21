@@ -42,15 +42,12 @@ public class SessionServiceTest {
   @Test
   @DisplayName("Should save a session")
   void save_shouldSaveASession() {
-
     Session session = TestDataGenerator.generateSession(1L);
-
     when(sessionRepository.save(session)).thenReturn(session);
 
     Session result = sessionService.create(session);
 
     assertThat(result).isEqualTo(session);
-
     verify(sessionRepository).save(session);
   }
 
@@ -139,7 +136,6 @@ public class SessionServiceTest {
     verify(sessionRepository).save(session);
   }
 
-
   // Unitaire
   @Test
   @DisplayName("Should throw an exception if session does not exist")
@@ -198,7 +194,6 @@ public class SessionServiceTest {
     Session session = TestDataGenerator.generateSession(sessionId);
     session.getUsers().add(toRemoveUser);
     session.getUsers().add(toNotRemoveUser);
-
     when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
 
     sessionService.noLongerParticipate(sessionId, userId);
@@ -207,7 +202,6 @@ public class SessionServiceTest {
     assertThat(session.getUsers()).contains(toNotRemoveUser);
     verify(sessionRepository).save(session);
   }
-
 
   // Unitaire
   @Test
@@ -223,7 +217,6 @@ public class SessionServiceTest {
     });
   }
 
-
   // Unitaire
   @Test
   @DisplayName("Should throw an exception if user not participate to session")
@@ -232,7 +225,6 @@ public class SessionServiceTest {
     Long userId = 1L;
     User participant = TestDataGenerator.generateUser(userId);
     Session session = TestDataGenerator.generateSession(sessionId);
-    // session.getUsers().add(participant);
 
     when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
 

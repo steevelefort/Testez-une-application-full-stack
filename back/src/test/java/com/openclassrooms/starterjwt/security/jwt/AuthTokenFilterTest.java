@@ -7,7 +7,6 @@ import java.util.Collections;
 
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.anyString;
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +20,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.openclassrooms.starterjwt.security.services.UserDetailsServiceImpl;
@@ -56,29 +54,23 @@ public class AuthTokenFilterTest {
 
   @Test
   void doFilterInternal_shouldSetAuthentication_whenValidToken() throws Exception {
-    // given
     String token = "validToken";
     String username = "test@test.com";
-
     when(request.getHeader("Authorization")).thenReturn("Bearer " + token);
     when(jwtUtils.validateJwtToken(token)).thenReturn(true);
     when(jwtUtils.getUserNameFromJwtToken(token)).thenReturn(username);
     when(userDetailsService.loadUserByUsername(username)).thenReturn(userDetails);
     when(userDetails.getAuthorities()).thenReturn(Collections.emptyList());
 
-    // when
     authTokenFilter.doFilterInternal(request, response, filterChain);
 
-    // then
     verify(filterChain).doFilter(request, response);
   }
 
   @Test
   void doFilterInternal_shouldCalldoFilter_whenException() throws Exception {
-    // given
     String token = "validToken";
     String username = "test@test.com";
-
     when(request.getHeader("Authorization")).thenReturn("Bearer " + token);
     when(jwtUtils.validateJwtToken(token)).thenReturn(true);
     when(jwtUtils.getUserNameFromJwtToken(token)).thenReturn(username);
@@ -92,29 +84,23 @@ public class AuthTokenFilterTest {
 
   @Test
   void doFilterInternal_shouldNotSetAuthentication_whenNoToken() throws Exception {
-    // given
     when(request.getHeader("Authorization")).thenReturn(null);
 
-    // when
     authTokenFilter.doFilterInternal(request, response, filterChain);
 
-    // then
     verify(filterChain).doFilter(request, response);
     verify(jwtUtils, never()).validateJwtToken(any());
   }
 
   @Test
   void doFilterInternal_shouldNotSetAuthentication_whenInvalidToken() throws Exception {
-    // given
     String token = "invalidToken";
 
     when(request.getHeader("Authorization")).thenReturn("Bearer " + token);
     when(jwtUtils.validateJwtToken(token)).thenReturn(false);
 
-    // when
     authTokenFilter.doFilterInternal(request, response, filterChain);
 
-    // then
     verify(filterChain).doFilter(request, response);
     verify(userDetailsService, never()).loadUserByUsername(any());
   }

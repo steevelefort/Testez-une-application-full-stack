@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.openclassrooms.starterjwt.helpers.TestDataGenerator;
 import com.openclassrooms.starterjwt.models.Teacher;
 import com.openclassrooms.starterjwt.repository.TeacherRepository;
 
@@ -28,38 +28,10 @@ public class TeacherServiceTest {
   @InjectMocks
   TeacherService teacherService;
 
-  /**
-   * Generate a single fake teacher
-   *
-   * @param id id of the teacher
-   * @return Teacher
-   */
-  private Teacher generateTeacher(Long id) {
-    Teacher teacher = new Teacher();
-    teacher.setId(id);
-    teacher.setFirstName("teacher" + id);
-    teacher.setLastName("teacher" + id);
-    return teacher;
-  }
-
-  /**
-   * Generate a list of fake teachers
-   *
-   * @return List<Teacher>
-   */
-  private List<Teacher> generateTeacherList(int quantity) {
-    List<Teacher> teachers = new ArrayList<Teacher>();
-    for (long i = 1L; i <= (long) quantity; i++) {
-      Teacher teacher = generateTeacher(i);
-      teachers.add(teacher);
-    }
-    return teachers;
-  }
-
   @Test
   @DisplayName("Should return a list of teacher")
   void findAll_shouldReturnAListOfTeacher() {
-    List<Teacher> expectedTeachers = generateTeacherList(3);
+    List<Teacher> expectedTeachers = TestDataGenerator.generateTeacherList(3);
     when(teacherRepository.findAll()).thenReturn(expectedTeachers);
 
     List<Teacher> result = teacherService.findAll();
@@ -72,7 +44,7 @@ public class TeacherServiceTest {
   @DisplayName("Should return a teacher when teacher exists")
   void findById_shouldReturnATeacher_whenTeacherExists() {
     Long teacherId = 1L;
-    Teacher expectedTeacher = generateTeacher(teacherId);
+    Teacher expectedTeacher = TestDataGenerator.generateTeacher(teacherId);
     when(teacherRepository.findById(teacherId)).thenReturn(Optional.of(expectedTeacher));
 
     Teacher result = teacherService.findById(teacherId);
@@ -92,7 +64,5 @@ public class TeacherServiceTest {
     assertThat(result).isNull();
     verify(teacherRepository).findById(teacherId);
   }
-
-
 
 }

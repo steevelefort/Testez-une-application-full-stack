@@ -16,26 +16,25 @@ import com.openclassrooms.starterjwt.models.Teacher;
 
 @SpringBootTest
 @DisplayName("TeacherMapper - Tests")
-public class TeacherMapperTest {
+public class TeacherMapperIntegrationTest {
 
   @Autowired
   TeacherMapper teacherMapper;
 
   @Test
   void toEntity_shouldReturnNull_withNullEntry() {
-    assertThat(teacherMapper.toEntity((TeacherDto)null)).isNull();
-    assertThat(teacherMapper.toEntity((List<TeacherDto>)null)).isNull();
-  } 
+    assertThat(teacherMapper.toEntity((TeacherDto) null)).isNull();
+    assertThat(teacherMapper.toEntity((List<TeacherDto>) null)).isNull();
+  }
 
   @Test
   void toDto_shouldReturnNull_withNullEntry() {
-    assertThat(teacherMapper.toDto((Teacher)null)).isNull();
-    assertThat(teacherMapper.toDto((List<Teacher>)null)).isNull();
+    assertThat(teacherMapper.toDto((Teacher) null)).isNull();
+    assertThat(teacherMapper.toDto((List<Teacher>) null)).isNull();
   }
 
   @Test
   void toEntity_shouldReturnAValidEntity_withValidData() {
-
     TeacherDto teacherDto = new TeacherDto();
     teacherDto.setId(1L);
     teacherDto.setLastName("Doe");
@@ -75,13 +74,9 @@ public class TeacherMapperTest {
     assertThat(teachers.get(0).getId()).isEqualTo(teacherDto1.getId());
     assertThat(teachers.get(0).getFirstName()).isEqualTo(teacherDto1.getFirstName());
     assertThat(teachers.get(0).getLastName()).isEqualTo(teacherDto1.getLastName());
-
     assertThat(teachers.get(1).getId()).isEqualTo(teacherDto2.getId());
     assertThat(teachers.get(1).getFirstName()).isEqualTo(teacherDto2.getFirstName());
     assertThat(teachers.get(1).getLastName()).isEqualTo(teacherDto2.getLastName());
   }
 
 }
-
-
-

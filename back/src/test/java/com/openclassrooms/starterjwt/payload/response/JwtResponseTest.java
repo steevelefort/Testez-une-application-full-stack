@@ -10,8 +10,6 @@ public class JwtResponseTest {
   void setters_shouldUpdateJwtResponse() {
     JwtResponse jwtResponse = new JwtResponse("accessToken", 1L, "SteeveLefort", "Steeve", "Lefort", true);
 
-    // public JwtResponse(String accessToken, Long id, String username,String
-    // firstName, String lastName, Boolean admin) {
     jwtResponse.setToken("newToken");
     jwtResponse.setId(2L);
     jwtResponse.setUsername("newUserName");

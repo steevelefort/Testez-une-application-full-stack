@@ -42,6 +42,7 @@ class UserControllerIntegrationTest {
     User savedUser = userRepository.save(testUser);
 
     MvcResult result = mockMvc.perform(get("/api/user/{id}", savedUser.getId()))
+
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andReturn();
@@ -59,6 +60,7 @@ class UserControllerIntegrationTest {
     String userId = "xx";
 
     mockMvc.perform(get("/api/user/{id}", userId))
+
         .andExpect(status().isBadRequest());
   }
 
@@ -69,6 +71,7 @@ class UserControllerIntegrationTest {
     String notExistingUserId = "-1000";
 
     mockMvc.perform(get("/api/user/{id}", notExistingUserId))
+
         .andExpect(status().isNotFound());
   }
 
@@ -82,9 +85,9 @@ class UserControllerIntegrationTest {
     User savedUser = userRepository.save(testUser);
 
     mockMvc.perform(delete("/api/user/{id}", savedUser.getId()))
+
         .andExpect(status().isOk());
   }
-
 
   // Integration
   @Test
@@ -93,9 +96,9 @@ class UserControllerIntegrationTest {
     String notExistingUserId = "-1000";
 
     mockMvc.perform(delete("/api/user/{id}", notExistingUserId))
+
         .andExpect(status().isNotFound());
   }
-
 
   // Integration
   @Test
@@ -104,9 +107,9 @@ class UserControllerIntegrationTest {
     String notNumericUserId = "xxxx";
 
     mockMvc.perform(delete("/api/user/{id}", notNumericUserId))
+
         .andExpect(status().isBadRequest());
   }
-
 
   // Integration
   @Test
@@ -118,6 +121,7 @@ class UserControllerIntegrationTest {
     User savedUser = userRepository.save(testUser);
 
     mockMvc.perform(delete("/api/user/{id}", savedUser.getId()))
+
         .andExpect(status().isUnauthorized());
   }
 

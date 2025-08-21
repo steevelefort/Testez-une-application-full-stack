@@ -16,26 +16,25 @@ import com.openclassrooms.starterjwt.models.User;
 
 @SpringBootTest
 @DisplayName("UserMapper - Tests")
-public class UserMapperTest {
+public class UserMapperIntegrationTest {
 
   @Autowired
   UserMapper userMapper;
 
   @Test
   void toEntity_shouldReturnNull_withNullEntry() {
-    assertThat(userMapper.toEntity((UserDto)null)).isNull();
-    assertThat(userMapper.toEntity((List<UserDto>)null)).isNull();
-  } 
+    assertThat(userMapper.toEntity((UserDto) null)).isNull();
+    assertThat(userMapper.toEntity((List<UserDto>) null)).isNull();
+  }
 
   @Test
   void toDto_shouldReturnNull_withNullEntry() {
-    assertThat(userMapper.toDto((User)null)).isNull();
-    assertThat(userMapper.toDto((List<User>)null)).isNull();
+    assertThat(userMapper.toDto((User) null)).isNull();
+    assertThat(userMapper.toDto((List<User>) null)).isNull();
   }
 
   @Test
   void toEntity_shouldReturnAValidEntity_withValidData() {
-
     UserDto userDto = new UserDto();
     userDto.setId(1L);
     userDto.setEmail("steeve@lefort-software.fr");
@@ -53,15 +52,6 @@ public class UserMapperTest {
     assertThat(user.isAdmin()).isEqualTo(userDto.isAdmin());
     assertThat(user.getPassword()).isEqualTo(userDto.getPassword());
   }
-
-  // @Test
-  // void toDto_shouldReturnAValidDto_withValidData() {
-  //   User user = TestDataGenerator.generateUser(1L);
-  //   UserDto userDto = userMapper.toDto(user);
-  //
-  //   assertThat(userDto.getFirstName()).isEqualTo(user.getFirstName());
-  //   assertThat(userDto.getLastName()).isEqualTo(user.getLastName());
-  // }
 
   @Test
   void toEntity_shouldReturnAListOfEntities_withValidDtos() {
@@ -89,7 +79,6 @@ public class UserMapperTest {
     assertThat(users.get(0).getFirstName()).isEqualTo(userDto1.getFirstName());
     assertThat(users.get(0).getLastName()).isEqualTo(userDto1.getLastName());
     assertThat(users.get(0).getPassword()).isEqualTo(userDto1.getPassword());
-
     assertThat(users.get(1).getId()).isEqualTo(userDto2.getId());
     assertThat(users.get(1).getFirstName()).isEqualTo(userDto2.getFirstName());
     assertThat(users.get(1).getLastName()).isEqualTo(userDto2.getLastName());
@@ -114,6 +103,3 @@ public class UserMapperTest {
   }
 
 }
-
-
-

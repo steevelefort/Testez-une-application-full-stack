@@ -10,7 +10,6 @@ public class UserTest {
 
   @Test
   void constructor_shouldCreateUserWithRequiredFields() {
-    // Test avec le constructeur @RequiredArgsConstructor (champs @NonNull)
     User user = new User("test@example.com", "Doe", "John", "password123", false);
 
     assertThat(user.getEmail()).isEqualTo("test@example.com");
@@ -22,7 +21,7 @@ public class UserTest {
 
   @Test
   void constructor_shouldCreateUserWithBuilder() {
-    // Test avec le builder Lombok
+    // Builder Lombok
     User user = User.builder()
         .email("test@example.com")
         .lastName("Doe")
@@ -46,6 +45,7 @@ public class UserTest {
         .build();
 
     String result = user.toString();
+
     assertThat(result).isNotNull();
     assertThat(result).contains("User");
   }
@@ -53,9 +53,11 @@ public class UserTest {
   @Test
   void equals_shouldReturnTrue_whenCompareTheSameUser() {
     User user = new User();
-    user.setId(1L);
     User user2 = new User();
+
+    user.setId(1L);
     user2.setId(1L);
+
     assertThat(user.equals(user)).isTrue();
     assertThat(user.equals(user2)).isTrue();
   }
@@ -63,16 +65,20 @@ public class UserTest {
   @Test
   void equals_shouldReturnFalse_whenCompareDifferentUsers() {
     User user = new User();
-    user.setId(1L);
     User user2 = new User();
+
+    user.setId(1L);
     user2.setId(2L);
+
     assertThat(user.equals(user2)).isFalse();
   }
 
   @Test
   void equals_shouldReturnFalse_whenCompareAUserToDifferentClasses() {
     User user = new User();
+
     user.setId(1L);
+
     assertThat(user.equals(null)).isFalse();
     assertThat(user.equals("not a user")).isFalse();
   }
@@ -81,6 +87,7 @@ public class UserTest {
   void equals_shouldReturnTrue_whenBothIdsAreNull() {
     User user1 = new User();
     User user2 = new User();
+
     assertThat(user1.equals(user2)).isTrue();
   }
 
@@ -88,7 +95,9 @@ public class UserTest {
   void equals_shouldReturnFalse_whenOneIdIsNullAndOtherNot() {
     User user1 = new User();
     User user2 = new User();
+
     user2.setId(1L);
+
     assertThat(user1.equals(user2)).isFalse();
     assertThat(user2.equals(user1)).isFalse();
   }
@@ -96,15 +105,18 @@ public class UserTest {
   @Test
   void hashCode_shouldGenerateTheSameValue_whenIdsAreTheSame() {
     User user = new User();
-    user.setId(1L);
     User user2 = new User();
+
+    user.setId(1L);
     user2.setId(1L);
+
     assertThat(user.hashCode()).isEqualTo(user2.hashCode());
   }
 
   @Test
   void hashCode_shouldWork_whenIdIsNull() {
     User user = new User();
+
     assertThat(user.hashCode()).isNotNegative();
     assertThat(user.hashCode()).isInstanceOf(Integer.class);
   }
@@ -113,34 +125,18 @@ public class UserTest {
   void setTimeStamps_shouldModifyThem_whenValidDateTime() {
     LocalDateTime now = LocalDateTime.now();
     User user = new User();
+
     user.setCreatedAt(now);
     user.setUpdatedAt(now);
+
     assertThat(user.getCreatedAt()).isEqualTo(now);
     assertThat(user.getUpdatedAt()).isEqualTo(now);
   }
 
   @Test
-  void builder_shouldCreateUser_whenValidData() {
-    User user = User.builder()
-        .id(1L)
-        .email("test@test.com")
-        .firstName("John")
-        .lastName("Doe")
-        .password("password123")
-        .admin(false)
-        .build();
-
-    assertThat(user.getId()).isEqualTo(1L);
-    assertThat(user.getEmail()).isEqualTo("test@test.com");
-    assertThat(user.getFirstName()).isEqualTo("John");
-    assertThat(user.getLastName()).isEqualTo("Doe");
-    assertThat(user.getPassword()).isEqualTo("password123");
-    assertThat(user.isAdmin()).isFalse();
-  }
-
-  @Test
   void builder_toString_shouldReturnDescription() {
     User.UserBuilder builder = User.builder().email("test@test.com");
+
     assertThat(builder.toString()).contains("UserBuilder");
   }
 

@@ -37,6 +37,7 @@ class AuthControllerIntegrationTest {
   @Autowired
   PasswordEncoder passwordEncoder;
 
+  // Integration
   @Test
   @WithMockUser
   void postApiAuthLogin_ValidCredentials_ReturnsOk() throws Exception {
@@ -45,60 +46,58 @@ class AuthControllerIntegrationTest {
     String passwordHash = passwordEncoder.encode(password);
     testUser.setPassword(passwordHash);
     User savedUser = userRepository.save(testUser);
-
-    String loginRequest = "{\"email\":\"" + savedUser.getEmail() + "\",\"password\":\""+password+"\"}";
+    String loginRequest = "{\"email\":\"" + savedUser.getEmail() + "\",\"password\":\"" + password + "\"}";
 
     MvcResult result = mockMvc.perform(post("/api/auth/login")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(loginRequest))
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(loginRequest))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andReturn();
-    
+
     String response = result.getResponse().getContentAsString();
     assertThat(response).contains("token"); // ou le nom du champ JWT
     assertThat(response).contains(testUser.getEmail());
     assertThat(response).contains(testUser.getFirstName());
     assertThat(response).contains("true"); // isAdmin
-
   }
 
-
+  // Integration
   @Test
   void postApiAuthRegister_ValidData_ReturnsOk() throws Exception {
     String firstName = "Steeve";
     String lastName = "Lefort";
     String email = "not-existing-1234@not-existing.domain";
     String password = "Test1234!";
-
-    String registerRequest = "{\"email\":\""+email+"\",\"firstName\":\""+firstName+"\",\"lastName\":\""+lastName+"\",\"password\":\""+password+"\"}";
+    String registerRequest = "{\"email\":\"" + email + "\",\"firstName\":\"" + firstName + "\",\"lastName\":\""
+        + lastName + "\",\"password\":\"" + password + "\"}";
 
     MvcResult result = mockMvc.perform(post("/api/auth/register")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(registerRequest))
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(registerRequest))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andReturn();
-    
+
     String response = result.getResponse().getContentAsString();
     assertThat(response).contains("User registered successfully!");
   }
 
-
+  // Integration
   @Test
   void postApiAuthRegister_AlreadyExistingEmail_ReturnsBadRequest() throws Exception {
     User user = TestDataGenerator.generateUser();
     User savedUser = userRepository.save(user);
-
-    String registerRequest = "{\"email\":\""+user.getEmail()+"\",\"firstName\":\""+user.getFirstName()+"\",\"lastName\":\""+user.getLastName()+"\",\"password\":\""+user.getPassword()+"\"}";
+    String registerRequest = "{\"email\":\"" + user.getEmail() + "\",\"firstName\":\"" + user.getFirstName()
+        + "\",\"lastName\":\"" + user.getLastName() + "\",\"password\":\"" + user.getPassword() + "\"}";
 
     MvcResult result = mockMvc.perform(post("/api/auth/register")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(registerRequest))
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(registerRequest))
         .andExpect(status().isBadRequest())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andReturn();
-    
+
     String response = result.getResponse().getContentAsString();
     assertThat(response).contains("Error: Email is already taken!");
   }

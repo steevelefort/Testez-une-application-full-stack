@@ -30,9 +30,7 @@ public class UserServiceTest {
   @Test
   @DisplayName("Should find user by id when user exists")
   void findById_shouldReturnUser_whenUserExists () {
-    
     Long userId = 1L;
-
     User user = new User();
     user.setId(userId);
     user.setEmail("steeve@lefort-software.fr");
@@ -40,7 +38,6 @@ public class UserServiceTest {
     user.setFirstName("Steeve");
     user.setPassword("password");
     user.setAdmin(true);
-
     when(userRepository.findById(userId)).thenReturn(Optional.of(user));
 
     User foundUser = userService.findById(userId);
@@ -52,7 +49,6 @@ public class UserServiceTest {
     assertThat(foundUser.getFirstName()).isEqualTo("Steeve");
     assertThat(foundUser.getPassword()).isEqualTo("password");
     assertThat(foundUser.isAdmin()).isTrue();
-
     verify(userRepository).findById(userId);
   }
 
@@ -64,6 +60,7 @@ public class UserServiceTest {
     when(userRepository.findById(userId)).thenReturn(Optional.empty());
 
     User notFoundUser = userService.findById(userId);
+
     assertThat(notFoundUser).isNull();
     verify(userRepository).findById(userId);
   }
@@ -78,6 +75,5 @@ public class UserServiceTest {
 
     verify(userRepository).deleteById(userId);
   }
-
 
 }

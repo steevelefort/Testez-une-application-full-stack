@@ -46,6 +46,7 @@ class TeacherControllerIntegrationTest {
     Teacher savedTeacher = teacherRepository.save(testTeacher);
 
     MvcResult result = mockMvc.perform(get("/api/teacher/{id}", savedTeacher.getId()))
+
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andReturn();
@@ -62,6 +63,7 @@ class TeacherControllerIntegrationTest {
     String teacherId = "xx";
 
     mockMvc.perform(get("/api/teacher/{id}", teacherId))
+
         .andExpect(status().isBadRequest());
   }
 
@@ -72,9 +74,9 @@ class TeacherControllerIntegrationTest {
     String notExistingTeacherId = "-1000";
 
     mockMvc.perform(get("/api/teacher/{id}", notExistingTeacherId))
+
         .andExpect(status().isNotFound());
   }
-
 
   // Integration
   @Test
@@ -84,6 +86,7 @@ class TeacherControllerIntegrationTest {
     Teacher savedTeacher = teacherRepository.save(teacher);
 
     MvcResult result = mockMvc.perform(get("/api/teacher"))
+
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andReturn();

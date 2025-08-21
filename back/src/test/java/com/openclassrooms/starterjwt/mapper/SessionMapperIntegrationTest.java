@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @DisplayName("SessionMapper - Tests")
-public class SessionMapperTest {
+public class SessionMapperIntegrationTest {
 
   @Autowired
   private SessionMapper sessionMapper;
@@ -50,18 +50,21 @@ public class SessionMapperTest {
   @Test
   void toEntity_shouldHandleNullTeacherId() {
     SessionDto dto = new SessionDto();
+
     dto.setTeacher_id(null);
     Session result = sessionMapper.toEntity(dto);
+
     assertThat(result.getTeacher()).isNull();
   }
 
   @Test
   void toEntity_shouldProcessNonEmptyList() {
     List<SessionDto> dtoList = Arrays.asList(new SessionDto());
+
     List<Session> result = sessionMapper.toEntity(dtoList);
+
     assertThat(result).hasSize(1);
   }
-
 
   @Test
   void toEntity_shouldHandleUsersWithNullUser() {
@@ -70,23 +73,26 @@ public class SessionMapperTest {
     when(userService.findById(-1000L)).thenReturn(null);
 
     Session result = sessionMapper.toEntity(dto);
+
+    assertThat(result).isNotNull();
+    assertThat(result.getUsers()).isInstanceOf(List.class);
+    assertThat(result.getUsers().get(0)).isNull();
   }
 
   @Test
   void toDto_shouldHandleAllNullCases_inSessionTeacherId() {
     Session sessionWithNullTeacher = new Session();
     sessionWithNullTeacher.setId(1L);
-    sessionWithNullTeacher.setTeacher(null); 
-
+    sessionWithNullTeacher.setTeacher(null);
     SessionDto result2 = sessionMapper.toDto(sessionWithNullTeacher);
     assertThat(result2.getTeacher_id()).isNull();
-
     Session sessionWithTeacherIdNull = new Session();
     Teacher teacherWithNullId = new Teacher();
-    teacherWithNullId.setId(null); 
+    teacherWithNullId.setId(null);
     sessionWithTeacherIdNull.setTeacher(teacherWithNullId);
 
     SessionDto result3 = sessionMapper.toDto(sessionWithTeacherIdNull);
+
     assertThat(result3.getTeacher_id()).isNull();
   }
 }
