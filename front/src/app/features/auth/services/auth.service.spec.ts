@@ -6,7 +6,7 @@ import { SessionInformation } from 'src/app/interfaces/sessionInformation.interf
 
 import { AuthService } from './auth.service';
 
-describe('SessionsService', () => {
+describe('AuthService', () => {
   let service: AuthService;
   let pathService: string;
 
