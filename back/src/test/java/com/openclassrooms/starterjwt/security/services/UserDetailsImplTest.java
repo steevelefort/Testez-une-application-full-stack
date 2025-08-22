@@ -35,7 +35,7 @@ public class UserDetailsImplTest {
   }
 
   @Test
-  void accountStatusMethods_shouldReturnTrueForAllMethods() {
+  void accountStatusMethods_shouldReturnTrue_whenCheckingAccountStatus() {
     UserDetailsImpl userDetails = UserDetailsImpl.builder().build();
 
     assertThat(userDetails.isAccountNonExpired()).isTrue();

@@ -36,7 +36,7 @@ public class SessionMapperIntegrationTest {
   private UserService userService;
 
   @Test
-  void toEntity_shouldReturnNull_whenInpusAreNull() {
+  void toEntity_shouldReturnNull_whenInputsAreNull() {
     assertThat(sessionMapper.toEntity((SessionDto) null)).isNull();
     assertThat(sessionMapper.toEntity((List<SessionDto>) null)).isNull();
   }
@@ -67,7 +67,7 @@ public class SessionMapperIntegrationTest {
   }
 
   @Test
-  void toEntity_shouldHandleUsersWithNullUser() {
+  void toEntity_shouldHandleUserList_WhenNullUser() {
     SessionDto dto = new SessionDto();
     dto.setUsers(Arrays.asList(-1000L));
     when(userService.findById(-1000L)).thenReturn(null);
@@ -80,7 +80,7 @@ public class SessionMapperIntegrationTest {
   }
 
   @Test
-  void toDto_shouldHandleAllNullCases_inSessionTeacherId() {
+  void toDto_shouldReturnNullTeacherId_whenTeacherIsNullOrHasNullId() {
     Session sessionWithNullTeacher = new Session();
     sessionWithNullTeacher.setId(1L);
     sessionWithNullTeacher.setTeacher(null);

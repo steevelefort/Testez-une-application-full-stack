@@ -7,6 +7,8 @@ import com.openclassrooms.starterjwt.repository.SessionRepository;
 import com.openclassrooms.starterjwt.repository.TeacherRepository;
 import com.openclassrooms.starterjwt.repository.UserRepository;
 import com.openclassrooms.starterjwt.helpers.TestDataGenerator;
+
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -29,6 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @AutoConfigureMockMvc
 @Transactional
 @Rollback
+@DisplayName("SessionController - Integration Tests")
 class SessionControllerIntegrationTest {
 
   @Autowired
@@ -46,7 +49,6 @@ class SessionControllerIntegrationTest {
   @Test
   @WithMockUser
   void getApiSession_ValidId_ReturnsOkAndSessionData() throws Exception {
-    // Generate and save a session in the database
     Session testSession = TestDataGenerator.generateSession();
     Session savedSession = sessionRepository.save(testSession);
 
@@ -58,7 +60,7 @@ class SessionControllerIntegrationTest {
 
     String responseContent = result.getResponse().getContentAsString();
     assertThat(responseContent).contains(savedSession.getName());
-    assertThat(responseContent).contains(savedSession.getDescription()); // si ce champ existe
+    assertThat(responseContent).contains(savedSession.getDescription());
   }
 
   @Test
@@ -84,7 +86,6 @@ class SessionControllerIntegrationTest {
   @Test
   @WithMockUser
   void getApiSession_WithoutId_ReturnsOkAndAnListOfSessions() throws Exception {
-    // Generate and save a session in the database (to be sure to have at least one)
     Session testSession = TestDataGenerator.generateSession();
     Session savedSession = sessionRepository.save(testSession);
 

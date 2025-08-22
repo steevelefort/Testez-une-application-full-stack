@@ -3,6 +3,8 @@ package com.openclassrooms.starterjwt.controllers;
 import com.openclassrooms.starterjwt.models.User;
 import com.openclassrooms.starterjwt.repository.UserRepository;
 import com.openclassrooms.starterjwt.helpers.TestDataGenerator;
+
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,6 +27,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @AutoConfigureMockMvc
 @Transactional
 @Rollback
+@DisplayName("UserController - Integration Tests")
 class UserControllerIntegrationTest {
 
   @Autowired
@@ -36,7 +39,6 @@ class UserControllerIntegrationTest {
   @Test
   @WithMockUser
   void getApiUser_ValidId_ReturnsOkAndUserData() throws Exception {
-    // Generate and save a user in the database
     User testUser = TestDataGenerator.generateUser(null);
     User savedUser = userRepository.save(testUser);
 
@@ -76,7 +78,6 @@ class UserControllerIntegrationTest {
   @WithMockUser(username = "user-x270190@existing.domain")
   void deleteApiUser_ValidIdAndSameAsCurrentUser_DeleteUserAndReturnOk() throws Exception {
     String userEmail = "user-x270190@existing.domain";
-    // Generate and save a user in the database
     User testUser = TestDataGenerator.generateUserWithEmail(userEmail);
     User savedUser = userRepository.save(testUser);
 
@@ -109,7 +110,6 @@ class UserControllerIntegrationTest {
   @WithMockUser(username = "user-x270190@existing.domain")
   void deleteApiUser_ValidIdAndDifferentAsCurrentUser_ReturnUnauthorized() throws Exception {
     String userEmail = "user-a123456@existing.domain";
-    // Generate and save a user in the database
     User testUser = TestDataGenerator.generateUserWithEmail(userEmail);
     User savedUser = userRepository.save(testUser);
 

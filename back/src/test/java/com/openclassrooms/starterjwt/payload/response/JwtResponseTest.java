@@ -2,12 +2,14 @@ package com.openclassrooms.starterjwt.payload.response;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("JwtResponse - Tests")
 public class JwtResponseTest {
 
   @Test
-  void setters_shouldUpdateJwtResponse() {
+  void setters_shouldUpdateAllFields_whenValidValues() {
     JwtResponse jwtResponse = new JwtResponse("accessToken", 1L, "SteeveLefort", "Steeve", "Lefort", true);
 
     jwtResponse.setToken("newToken");

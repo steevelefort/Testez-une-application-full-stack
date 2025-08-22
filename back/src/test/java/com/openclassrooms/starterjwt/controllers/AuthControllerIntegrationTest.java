@@ -3,6 +3,8 @@ package com.openclassrooms.starterjwt.controllers;
 import com.openclassrooms.starterjwt.models.User;
 import com.openclassrooms.starterjwt.repository.UserRepository;
 import com.openclassrooms.starterjwt.helpers.TestDataGenerator;
+
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,6 +28,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @AutoConfigureMockMvc
 @Transactional
 @Rollback
+@DisplayName("AuthController - Integration Tests")
 class AuthControllerIntegrationTest {
 
   @Autowired
@@ -55,7 +58,7 @@ class AuthControllerIntegrationTest {
         .andReturn();
 
     String response = result.getResponse().getContentAsString();
-    assertThat(response).contains("token"); // ou le nom du champ JWT
+    assertThat(response).contains("token");
     assertThat(response).contains(testUser.getEmail());
     assertThat(response).contains(testUser.getFirstName());
     assertThat(response).contains("true"); // isAdmin

@@ -38,9 +38,7 @@ public class SessionServiceTest {
   @InjectMocks
   SessionService sessionService;
 
-  // Unitaire
   @Test
-  @DisplayName("Should save a session")
   void save_shouldSaveASession() {
     Session session = TestDataGenerator.generateSession(1L);
     when(sessionRepository.save(session)).thenReturn(session);
@@ -51,9 +49,7 @@ public class SessionServiceTest {
     verify(sessionRepository).save(session);
   }
 
-  // Unitaire
   @Test
-  @DisplayName("Should delete a session")
   void delete_shouldDeleteASession() {
     Long id = 1L;
 
@@ -62,9 +58,7 @@ public class SessionServiceTest {
     verify(sessionRepository).deleteById(id);
   }
 
-  // Unitaire
   @Test
-  @DisplayName("Should returns all sessions")
   void findAll_shouldReturnAllSessions() {
     List<Session> sessions = new ArrayList<>();
     for (Long i = 1L; i <= 3L; i++) {
@@ -78,9 +72,7 @@ public class SessionServiceTest {
     verify(sessionRepository).findAll();
   }
 
-  // Unitaire
   @Test
-  @DisplayName("Should returns a session when it exists")
   void getById_shouldReturnSession_whenSessionExists() {
     Long id = 1L;
     Session expectedSession = TestDataGenerator.generateSession(id);
@@ -92,9 +84,7 @@ public class SessionServiceTest {
     verify(sessionRepository).findById(id);
   }
 
-  // Unitaire
   @Test
-  @DisplayName("Should returns null when session does not exist")
   void getById_shouldReturnNull_whenSessionDoesNotExist() {
     Long id = 1L;
     when(sessionRepository.findById(id)).thenReturn(Optional.empty());
@@ -105,9 +95,7 @@ public class SessionServiceTest {
     verify(sessionRepository).findById(id);
   }
 
-  // Unitaire
   @Test
-  @DisplayName("Should update a session when it exists")
   void update_shouldUpdateSession_whenSessionExists() {
     Long id = 1L;
     Session session = TestDataGenerator.generateSession(id);
@@ -119,9 +107,7 @@ public class SessionServiceTest {
     verify(sessionRepository).save(session);
   }
 
-  // Unitaire
   @Test
-  @DisplayName("Should participate in a session when user not already participate")
   void participate_shouldParticipateInSession_whenUserNotAlreadyParticipate() {
     Long sessionId = 1L;
     Long userId = 1L;
@@ -136,9 +122,7 @@ public class SessionServiceTest {
     verify(sessionRepository).save(session);
   }
 
-  // Unitaire
   @Test
-  @DisplayName("Should throw an exception if session does not exist")
   void participate_shouldThrowException_whenSessionDoesNotExist() {
     Long sessionId = 1L;
     Long userId = 1L;
@@ -150,9 +134,7 @@ public class SessionServiceTest {
     });
   }
 
-  // Unitaire
   @Test
-  @DisplayName("Should throw an exception if user does not exist")
   void participate_shouldThrowException_whenUserDoesNotExist() {
     Long sessionId = 1L;
     Long userId = 1L;
@@ -166,15 +148,13 @@ public class SessionServiceTest {
     });
   }
 
-  // Unitaire
   @Test
-  @DisplayName("Should throw an exception if user already participate")
   void participate_shouldThrowException_whenUserAlreadyParticipate() {
     Long sessionId = 1L;
     Long userId = 1L;
     User participant = TestDataGenerator.generateUser(userId);
     Session session = TestDataGenerator.generateSession(sessionId);
-    session.getUsers().add(participant); // user already participate
+    session.getUsers().add(participant);
     when(userRepository.findById(userId)).thenReturn(Optional.of(participant));
     when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
 
@@ -183,9 +163,7 @@ public class SessionServiceTest {
     });
   }
 
-  // Unitaire
   @Test
-  @DisplayName("Should no longer participate to a session if user participate")
   void noLongerParticipate_shouldNoLongerParticipateToASession_whenUserParticipate() {
     Long sessionId = 1L;
     Long userId = 1L;
@@ -203,9 +181,7 @@ public class SessionServiceTest {
     verify(sessionRepository).save(session);
   }
 
-  // Unitaire
   @Test
-  @DisplayName("Should throw an exception session does not exist")
   void noLongerParticipate_shouldThrowException_whenSessionDoesNotExist() {
     Long sessionId = 1L;
     Long userId = 1L;
@@ -217,9 +193,7 @@ public class SessionServiceTest {
     });
   }
 
-  // Unitaire
   @Test
-  @DisplayName("Should throw an exception if user not participate to session")
   void noLongerParticipate_shouldThrowException_whenUserNotParticipate() {
     Long sessionId = 1L;
     Long userId = 1L;

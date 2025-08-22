@@ -28,8 +28,7 @@ public class UserServiceTest {
   private UserService userService;
 
   @Test
-  @DisplayName("Should find user by id when user exists")
-  void findById_shouldReturnUser_whenUserExists () {
+  void findById_shouldReturnUser_whenUserExists() {
     Long userId = 1L;
     User user = new User();
     user.setId(userId);
@@ -52,10 +51,8 @@ public class UserServiceTest {
     verify(userRepository).findById(userId);
   }
 
-
   @Test
-  @DisplayName("Should return null when user does not exist")
-  void findById_shouldReturnNull_whenUserDoesNotExist () {
+  void findById_shouldReturnNull_whenUserDoesNotExist() {
     Long userId = 1L;
     when(userRepository.findById(userId)).thenReturn(Optional.empty());
 
@@ -65,10 +62,8 @@ public class UserServiceTest {
     verify(userRepository).findById(userId);
   }
 
-
   @Test
-  @DisplayName("Should delete user when user exists")
-  void delete_shouldDeleteUser_whenUserExists () {
+  void delete_shouldDeleteUser_whenUserExists() {
     Long userId = 1L;
 
     userService.delete(userId);

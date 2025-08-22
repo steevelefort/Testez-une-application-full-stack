@@ -29,8 +29,7 @@ public class TeacherServiceTest {
   TeacherService teacherService;
 
   @Test
-  @DisplayName("Should return a list of teacher")
-  void findAll_shouldReturnAListOfTeacher() {
+  void findAll_shouldReturnAListOfTeachers() {
     List<Teacher> expectedTeachers = TestDataGenerator.generateTeacherList(3);
     when(teacherRepository.findAll()).thenReturn(expectedTeachers);
 
@@ -41,7 +40,6 @@ public class TeacherServiceTest {
   }
 
   @Test
-  @DisplayName("Should return a teacher when teacher exists")
   void findById_shouldReturnATeacher_whenTeacherExists() {
     Long teacherId = 1L;
     Teacher expectedTeacher = TestDataGenerator.generateTeacher(teacherId);
@@ -54,7 +52,6 @@ public class TeacherServiceTest {
   }
 
   @Test
-  @DisplayName("Should return null when teacher does not exist")
   void findById_shouldReturnNull_whenTeacherDoesNotExist() {
     Long teacherId = 1L;
     when(teacherRepository.findById(teacherId)).thenReturn(Optional.empty());

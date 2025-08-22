@@ -38,7 +38,6 @@ public class JwtUtilsTest {
   }
 
   @Test
-  @DisplayName("Should return false when token is malformed")
   void validateJwtToken_shouldReturnFalse_whenTokenIsMalformed() {
     String malformedToken = "malformed.token.here";
 
@@ -48,7 +47,6 @@ public class JwtUtilsTest {
   }
 
   @Test
-  @DisplayName("Should return false when token is expired")
   void validateJwtToken_shouldReturnFalse_whenTokenIsExpired() {
     String expiredToken = Jwts.builder()
         .setSubject("testuser")
@@ -63,13 +61,12 @@ public class JwtUtilsTest {
   }
 
   @Test
-  @DisplayName("Should return false when token has invalid signature")
   void validateJwtToken_shouldReturnFalse_whenTokenHasInvalidSignature() {
     String invalidSignatureToken = Jwts.builder()
         .setSubject("testuser")
         .setIssuedAt(new Date())
         .setExpiration(new Date(System.currentTimeMillis() + 86400000))
-        .signWith(SignatureAlgorithm.HS512, "wrongSecretKey") // Wrong signature key
+        .signWith(SignatureAlgorithm.HS512, "wrongSecretKey")
         .compact();
 
     boolean result = jwtUtils.validateJwtToken(invalidSignatureToken);
@@ -78,14 +75,12 @@ public class JwtUtilsTest {
   }
 
   @Test
-  @DisplayName("Should return false when token is null or empty")
   void validateJwtToken_shouldReturnFalse_whenTokenIsNullOrEmpty() {
     assertThat(jwtUtils.validateJwtToken(null)).isFalse();
     assertThat(jwtUtils.validateJwtToken("")).isFalse();
   }
 
   @Test
-  @DisplayName("Should return true when token is valid")
   void validateJwtToken_shouldReturnTrue_whenTokenIsValid() {
     String validToken = Jwts.builder()
         .setSubject("testuser")
@@ -100,7 +95,6 @@ public class JwtUtilsTest {
   }
 
   @Test
-  @DisplayName("Should generate valid JWT token")
   void generateJwtToken_shouldGenerateValidToken_whenAuthenticationIsValid() {
     when(userDetails.getUsername()).thenReturn("steeve@lefort-software.fr");
     when(authentication.getPrincipal()).thenReturn(userDetails);
@@ -112,7 +106,6 @@ public class JwtUtilsTest {
   }
 
   @Test
-  @DisplayName("Should extract username from valid token")
   void getUserNameFromJwtToken_shouldReturnUsername_whenTokenIsValid() {
     String username = "steeve@lefort-software.fr";
     when(userDetails.getUsername()).thenReturn(username);

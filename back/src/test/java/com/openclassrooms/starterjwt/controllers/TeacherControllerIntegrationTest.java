@@ -4,6 +4,8 @@ import com.openclassrooms.starterjwt.models.Teacher;
 import com.openclassrooms.starterjwt.repository.TeacherRepository;
 import com.openclassrooms.starterjwt.repository.UserRepository;
 import com.openclassrooms.starterjwt.helpers.TestDataGenerator;
+
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -29,6 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @AutoConfigureMockMvc
 @Transactional
 @Rollback
+@DisplayName("TeacherController - Integration Tests")
 class TeacherControllerIntegrationTest {
 
   @Autowired
@@ -39,8 +42,7 @@ class TeacherControllerIntegrationTest {
 
   @Test
   @WithMockUser
-  void getApiTeacher_ValidId_ReturnsOkAndUserData() throws Exception {
-    // Generate and save a user in the database
+  void getApiTeacher_ValidId_ReturnsOkAndTeacherData() throws Exception {
     Teacher testTeacher = TestDataGenerator.generateTeacher(null);
     Teacher savedTeacher = teacherRepository.save(testTeacher);
 
@@ -77,7 +79,7 @@ class TeacherControllerIntegrationTest {
 
   @Test
   @WithMockUser
-  void getApiTeacher_WhithoutId_ReturnsOkWithAListOfTeachers() throws Exception {
+  void getApiTeacher_WithoutId_ReturnsOkWithAListOfTeachers() throws Exception {
     Teacher teacher = TestDataGenerator.generateTeacher(null);
     Teacher savedTeacher = teacherRepository.save(teacher);
 

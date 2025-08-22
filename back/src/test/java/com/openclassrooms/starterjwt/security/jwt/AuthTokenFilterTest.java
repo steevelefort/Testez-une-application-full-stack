@@ -68,7 +68,7 @@ public class AuthTokenFilterTest {
   }
 
   @Test
-  void doFilterInternal_shouldCalldoFilter_whenException() throws Exception {
+  void doFilterInternal_shouldCallDoFilter_whenAnExceptionRises() throws Exception {
     String token = "validToken";
     String username = "test@test.com";
     when(request.getHeader("Authorization")).thenReturn("Bearer " + token);
