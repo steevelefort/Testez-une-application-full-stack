@@ -142,6 +142,7 @@ Report available at: `back/target/site/jacoco/index.html`
 ### E2E coverage
 ```bash
 cd front
+npm run e2e:ci
 npm run e2e:coverage
 ```
 Report available at: `front/coverage/lcov-report/index.html`
