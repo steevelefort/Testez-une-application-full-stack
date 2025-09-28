@@ -51,7 +51,6 @@ describe('MeComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [MeComponent],
       imports: [
-        MatSnackBarModule,
         MatCardModule,
         MatFormFieldModule,
         MatIconModule,
