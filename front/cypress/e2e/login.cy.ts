@@ -22,20 +22,13 @@ describe('Login spec', () => {
     cy.url().should('include', '/sessions')
   })
 
-  it('fait to Login', () => {
+  it('fail to Login', () => {
     cy.visit('/login')
 
     cy.intercept('POST', '/api/auth/login', {
       body: mockUser,
       statusCode: 400
     })
-
-    cy.intercept(
-      {
-        method: 'GET',
-        url: '/api/session',
-      },
-      []).as('session')
 
     cy.get('[data-cy=email]').type("yoga@studio.com")
     cy.get('[data-cy=password]').type(`${"test!1234"}{enter}{enter}`)
