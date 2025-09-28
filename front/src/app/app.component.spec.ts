@@ -39,8 +39,6 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes([]),
-        // HttpClientModule,
-        HttpClientTestingModule,
         MatToolbarModule
       ],
       declarations: [

@@ -20,7 +20,6 @@ describe('AuthService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientModule
       ],
       providers: [
         { provide: HttpClient, useValue: mockHttpClient },

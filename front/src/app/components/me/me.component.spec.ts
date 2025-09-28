@@ -1,4 +1,3 @@
-import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material/card';
@@ -53,7 +52,6 @@ describe('MeComponent', () => {
       declarations: [MeComponent],
       imports: [
         MatSnackBarModule,
-        // HttpClientModule,
         MatCardModule,
         MatFormFieldModule,
         MatIconModule,
@@ -182,4 +180,3 @@ describe('MeComponent - Integration', () => {
   })
 
 });
-

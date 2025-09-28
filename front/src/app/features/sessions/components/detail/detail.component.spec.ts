@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed} from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -52,10 +53,12 @@ describe('DetailComponent', () => {
     }
   };
 
+  const mockHttpClient = {
+  }
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule,
         MatSnackBarModule,
         ReactiveFormsModule,
         MatCardModule,
@@ -69,7 +72,8 @@ describe('DetailComponent', () => {
         { provide: SessionApiService, useValue: mockSessionApiService },
         { provide: MatSnackBar, useValue: mockMatSnackBar },
         { provide: Router, useValue: mockRouter },
-        { provide: ActivatedRoute, useValue: mockActivatedRoute }
+        { provide: ActivatedRoute, useValue: mockActivatedRoute },
+        { provide: HttpClient, useValue: mockHttpClient }
       ],
     })
       .compileComponents();

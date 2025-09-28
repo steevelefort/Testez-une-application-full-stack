@@ -22,7 +22,7 @@ describe('LoginComponent', () => {
 
   const mockAuthService = {
     register: jest.fn().mockReturnValue(of(null)),
-    login: jest.fn() //.mockReturnValue(of(null))
+    login: jest.fn()
   }
 
   const mockSessionService = {
@@ -43,7 +43,6 @@ describe('LoginComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
       imports: [
-        RouterTestingModule,
         NoopAnimationsModule,
         MatCardModule,
         MatIconModule,

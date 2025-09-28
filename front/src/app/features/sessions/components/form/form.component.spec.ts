@@ -9,7 +9,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
 import { expect } from '@jest/globals';
 import { of } from 'rxjs';
 import { TeacherService } from 'src/app/services/teacher.service';
@@ -66,9 +65,6 @@ describe('FormComponent', () => {
     await TestBed.configureTestingModule({
 
       imports: [
-        RouterTestingModule,
-        // HttpClientModule,
-        // HttpClientTestingModule,
         MatCardModule,
         MatIconModule,
         MatFormFieldModule,
@@ -170,12 +166,23 @@ describe('FormComponentNoAdmin', () => {
     create: jest.fn()
   }
 
+  const mockRouter = {
+    navigate: jest.fn(),
+    url: '/sessions'
+  }
+
+  const mockActivatedRoute = {
+    snapshot: {
+      paramMap: {
+        get: jest.fn().mockReturnValue('1')
+      }
+    }
+  }
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
 
       imports: [
-        RouterTestingModule,
-        // HttpClientModule,
         MatCardModule,
         MatIconModule,
         MatFormFieldModule,
@@ -189,6 +196,8 @@ describe('FormComponentNoAdmin', () => {
         { provide: SessionService, useValue: mockSessionService },
         { provide: TeacherService, useValue: mockTeacherService },
         { provide: SessionApiService, useValue: mockSessionApiService },
+        { provide: Router, useValue: mockRouter},
+        { provide: ActivatedRoute, useValue: mockActivatedRoute},
       ],
       declarations: [FormComponent]
     })
@@ -276,8 +285,6 @@ describe('FormComponent - Integration', () => {
     await TestBed.configureTestingModule({
 
       imports: [
-        RouterTestingModule,
-        // HttpClientModule,
         HttpClientTestingModule,
         MatCardModule,
         MatIconModule,
@@ -289,9 +296,6 @@ describe('FormComponent - Integration', () => {
         NoopAnimationsModule
       ],
       providers: [
-        // { provide: TeacherService, useValue: mockTeacherService },
-        // { provide: SessionService, useValue: mockSessionService },
-        // { provide: SessionApiService, useValue: mockSessionApiService },
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
         { provide: Router, useValue: mockRouter },
       ],

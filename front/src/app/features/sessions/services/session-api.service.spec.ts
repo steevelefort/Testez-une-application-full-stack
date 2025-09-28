@@ -6,7 +6,7 @@ import { Session } from '../interfaces/session.interface';
 
 import { SessionApiService } from './session-api.service';
 
-describe('SessionsService', () => {
+describe('SessionApiService', () => {
   let service: SessionApiService;
   let pathService: string;
 
